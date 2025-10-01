@@ -1,4 +1,4 @@
-import { CheckCircle, XCircle, Star, TrendingUp, AlertTriangle, BookOpen, Award, Brain } from 'lucide-react';
+import { CheckCircle, XCircle, Star, TrendingUp, AlertTriangle, BookOpen, Award, Brain,Sparkles } from 'lucide-react';
 import { EvaluationResult } from '../types';
 
 interface Props {
