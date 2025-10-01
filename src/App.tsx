@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Hero from './components/Hero';
 import EvaluationForm from './components/EvaluationForm';
 import ResultsDisplay from './components/ResultsDisplay';
@@ -10,6 +10,9 @@ function App() {
   const [result, setResult] = useState<EvaluationResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // ref for results section
+  const resultRef = useRef<HTMLDivElement | null>(null);
 
   const handleEvaluation = async (request: EvaluationRequest) => {
     setIsLoading(true);
@@ -33,10 +36,10 @@ function App() {
     setError(null);
   };
 
-  // 🔹 Scroll to top when result is set
+  // scroll to top of ResultsDisplay only
   useEffect(() => {
-    if (result) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (result && resultRef.current) {
+      resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }, [result]);
 
@@ -45,7 +48,9 @@ function App() {
       <Hero />
       
       {result ? (
-        <ResultsDisplay result={result} onReset={handleReset} />
+        <div ref={resultRef}>
+          <ResultsDisplay result={result} onReset={handleReset} />
+        </div>
       ) : (
         <EvaluationForm 
           onSubmit={handleEvaluation}
