@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Upload, FileText, Loader2, AlertCircle, BookOpen, User, HelpCircle ,Brain} from 'lucide-react';
+import { Upload, FileText, Loader2, AlertCircle, BookOpen, User, HelpCircle ,Brain,Sparkles} from 'lucide-react';
 import { EvaluationRequest } from '../types';
 import { extractTextFromPDF, isValidPDF } from '../utils/pdfExtractor';
 
