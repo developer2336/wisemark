@@ -1,4 +1,4 @@
-import { Brain } from "lucide-react";
+import { Brain } from "lucide-react"
 
 export default function Footer() {
   return (
