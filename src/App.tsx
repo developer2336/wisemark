@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Hero from './components/Hero';
 import EvaluationForm from './components/EvaluationForm';
 import ResultsDisplay from './components/ResultsDisplay';
@@ -32,6 +32,13 @@ function App() {
     setResult(null);
     setError(null);
   };
+
+  // 🔹 Scroll to top when result is set
+  useEffect(() => {
+    if (result) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [result]);
 
   return (
     <div className="min-h-screen bg-white">
