@@ -1,8 +1,7 @@
 import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf';
+import workerUrl from 'pdfjs-dist/build/pdf.worker?url';
 
-// Load worker (required for browser environment)
-import pdfjsWorker from 'pdfjs-dist/legacy/build/pdf.worker.entry';
-pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
+pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl;
 
 export const extractTextFromPDF = async (file: File): Promise<string> => {
   return new Promise((resolve, reject) => {
@@ -34,24 +33,5 @@ export const extractTextFromPDF = async (file: File): Promise<string> => {
 };
 
 export const isValidPDF = (file: File): boolean => {
-  return file.type === 'application/pdf' && file.size <= 10 * 1024 * 1024; // 10MB
-};
-
-export const extractTextFromMultiplePDFs = async (files: File[]): Promise<string[]> => {
-  const results: string[] = [];
-
-  for (const file of files) {
-    if (isValidPDF(file)) {
-      try {
-        const text = await extractTextFromPDF(file);
-        results.push(text);
-      } catch (error) {
-        results.push(`Error extracting from ${file.name}: ${error instanceof Error ? error.message : 'Unknown error'}`);
-      }
-    } else {
-      results.push(`Invalid PDF file: ${file.name}`);
-    }
-  }
-
-  return results;
+  return file.type === 'application/pdf' && file.size <= 10 * 1024 * 1024;
 };
